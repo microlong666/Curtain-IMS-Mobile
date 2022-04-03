@@ -96,6 +96,17 @@ module.exports = {
       .end()
   },
   devServer: {
-    before: require('./mock/mock-server.js')
+    port: '9000',
+    open: true,
+    // before: require('./mock/mock-server.js'),
+    proxy: {
+      '/api': {
+        target: process.env.VUE_APP_BASE_API,
+        changeOrigin: true,
+        pathRewrite: {
+          '/api': ''
+        }
+      }
+    }
   }
 }

@@ -2,13 +2,21 @@ import Layout from '@/layout'
 
 const routes = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login'),
+    meta: {
+      title: '登录'
+    }
+  },
+  {
     path: '/',
     name: 'root',
     component: Layout,
-    redirect: 'Demo',
+    redirect: 'demo',
     children: [
       {
-        path: 'demo',
+        path: '/demo',
         name: 'Demo',
         component: () => import('@/views/demo'),
         meta: {
@@ -16,7 +24,7 @@ const routes = [
         }
       },
       {
-        path: 'tools',
+        path: '/tools',
         name: 'Tools',
         component: () => import('@/views/tools'),
         meta: {
@@ -24,7 +32,7 @@ const routes = [
         }
       },
       {
-        path: 'about',
+        path: '/about',
         name: 'About',
         component: () => import('@/views/about'),
         meta: {
@@ -33,6 +41,14 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Exception404',
+    component: () => import('@/views/exception'),
+    meta: {
+      title: '404'
+    }
   }
 ]
 

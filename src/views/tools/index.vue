@@ -1,21 +1,17 @@
 <template>
   <div>
-    <van-button @click="handleClick">Ajax 按钮</van-button>
+    <van-button @click="handleClick">获取当前用户信息</van-button>
   </div>
 </template>
 
 <script>
-import { login } from '@/api/user'
-import { Toast } from 'vant'
+import { Dialog } from 'vant'
 
 export default {
   name: 'Tools',
   setup() {
     const handleClick = () => {
-      login({ username: 'test', password: 123 }).then((res) => {
-        const { data } = res
-        Toast.success(data.token)
-      })
+      Dialog.alert({ message: '123' })
     }
 
     return {
@@ -26,5 +22,4 @@ export default {
 </script>
 
 <style>
-
 </style>

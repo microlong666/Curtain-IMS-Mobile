@@ -28,7 +28,7 @@ export default {
               })
             })
             .catch((error) => {
-              Toast.fail({
+              this.$toast.fail({
                 message: error.message
               })
             })

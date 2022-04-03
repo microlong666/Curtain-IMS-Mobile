@@ -5,13 +5,16 @@
 </template>
 
 <script>
+import store from '@/store'
 import { Dialog } from 'vant'
 
 export default {
   name: 'Tools',
   setup() {
     const handleClick = () => {
-      Dialog.alert({ message: '123' })
+      Dialog.alert({
+        message: JSON.stringify(store.state.user.user)
+      })
     }
 
     return {

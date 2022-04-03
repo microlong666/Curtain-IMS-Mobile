@@ -86,8 +86,8 @@ function goLogin(reload) {
  * @date 2021/4/2 15:33
  */
 function processErrorResponse(response) {
-  console.log(response)
-  if (response.data.code !== '700') {
+  // 判断登录是否过期
+  if (response.data.code != '1502') {
     // Toast.fail({
     //   message: response.data.message
     // })

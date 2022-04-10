@@ -27,7 +27,7 @@ export function signUp(data) {
 }
 
 /**
- * 登出接口
+ * 用户信息
  * @returns
  */
 export function getUserInfo() {
@@ -36,6 +36,67 @@ export function getUserInfo() {
     method: 'get'
   })
 }
+
+/**
+ * 用户信息
+ * @returns
+ */
+export function getUserDetail() {
+  return request({
+    url: '/system/currentUserInfo',
+    method: 'get'
+  })
+}
+
+/**
+ * 修改密码
+ * @returns
+ */
+export function changePwd(data) {
+  return request({
+    url: '/mgr/changePwd',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 上传头像
+ * @returns
+ */
+export function uploadAvatar(data) {
+  return request({
+    url: '/system/upload',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 更新头像
+ * @returns
+ */
+export function updateAvatar(data) {
+  return request({
+    url: '/system/updateAvatar',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 修改用户信息
+ * @returns
+ */
+export function editUserInfo(data) {
+  return request({
+    url: '/mgr/edit',
+    method: 'post',
+    data
+  })
+}
+
+
 
 /**
  * 登出接口

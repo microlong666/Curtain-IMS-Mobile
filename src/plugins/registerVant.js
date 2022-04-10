@@ -10,7 +10,18 @@ import {
   Notify,
   Empty,
   Toast,
-  Dialog
+  Dialog,
+  NoticeBar,
+  Sticky,
+  Swipe,
+  SwipeItem,
+  Uploader,
+  Image,
+  ImagePreview,
+  Tag,
+  NavBar,
+  Popup,
+  Picker
 } from 'vant'
 
 const componentList = [
@@ -25,7 +36,18 @@ const componentList = [
   Notify,
   Empty,
   Toast,
-  Dialog
+  Dialog,
+  NoticeBar,
+  Sticky,
+  Swipe,
+  SwipeItem,
+  Uploader,
+  Image,
+  ImagePreview,
+  Tag,
+  NavBar,
+  Popup,
+  Picker
 ]
 
 export function registerVantComp(app) {

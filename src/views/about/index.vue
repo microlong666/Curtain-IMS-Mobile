@@ -1,15 +1,53 @@
 <template>
-  <div style="padding-top: 80px">
-    <van-empty description="这是个人页">
-      <van-button type="primary" @click="logOut" round>登出</van-button>
-    </van-empty>
+  <div class="content">
+    <van-cell-group class="cell" inset>
+      <van-cell
+        size="large"
+        class="userInfo"
+        :to="{ name: 'UserInfo' }"
+        center
+        is-link
+      >
+        <template #title>
+          <div style="display: flex">
+            <span class="title van-ellipsis">{{ userInfo.name }}</span>
+            <van-tag plain type="primary" size="medium" class="tag">
+              {{ userInfo.roleName }}
+            </van-tag>
+          </div>
+        </template>
+        <template #label>
+          <span class="label">手机号: {{ userInfo.phone }}</span>
+        </template>
+        <template #icon class="avatar">
+          <van-image
+            round
+            fit="cover"
+            width="100"
+            height="100"
+            @click="previewAvatar()"
+            src="/api/system/previewAvatar"
+          />
+        </template>
+      </van-cell>
+    </van-cell-group>
+    <van-cell-group class="cell" inset>
+      <van-cell title="单元格" value="内容" />
+      <van-cell title="登出" @click="logOut" is-link />
+    </van-cell-group>
   </div>
 </template>
 
 <script>
 import { logOut } from '@/api/user'
+import store from '@/store'
 export default {
   name: 'About',
+  data() {
+    return {
+      userInfo: store.state.user.user
+    }
+  },
   methods: {
     logOut() {
       // 退出登录
@@ -40,8 +78,37 @@ export default {
 </script>
 
 <style scoped>
-.van-button {
+/* .van-button {
   width: 120px;
   height: 40px;
+} */
+.content {
+  padding: var(--van-padding-md) 0;
+}
+
+.cell {
+  margin-bottom: var(--van-padding-md);
+}
+
+.avatar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tag {
+  margin-left: var(--van-padding-xs);
+}
+
+.userInfo :deep(.van-cell__title) {
+  margin-left: var(--van-padding-md);
+}
+
+.userInfo :deep(.van-cell__label) {
+  margin-top: var(--van-padding-xs);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: var(--van-font-weight-bold);
 }
 </style>

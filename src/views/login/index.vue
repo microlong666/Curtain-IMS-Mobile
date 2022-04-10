@@ -67,6 +67,7 @@
               v-model="signUpForm.password"
               type="password"
               placeholder="密码"
+              :maxlength="12"
               :rules="signUpRules.password"
             />
           </div>
@@ -76,6 +77,7 @@
               v-model="signUpForm.confirmPassword"
               type="password"
               placeholder="确认密码"
+              :maxlength="12"
               :rules="signUpRules.confirmPassword"
             />
           </div>
@@ -184,7 +186,7 @@ export default {
                 return '两次输入密码不一致!'
               }
             },
-            trigger: 'blur'
+            trigger: 'onBlur'
           }
         ]
       }
@@ -272,16 +274,29 @@ export default {
 }
 </script>
 
-<style>
-@import '~@/styles/style.less';
-
+<style src="@/assets/style.css" scoped></style>
+<style lang="less" scoped>
 .van-cell {
   padding: 0;
   background: none;
   overflow: unset;
 }
 
-.van-field__body {
+:deep(.van-field__body) {
   height: 100%;
+}
+
+:deep(.van-field__body input) {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+:deep(.van-field__body input::placeholder) {
+  font-family: 'Poppins', sans-serif;
+  color: #aaa;
+  font-weight: 500;
 }
 </style>

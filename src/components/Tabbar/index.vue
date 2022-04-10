@@ -1,10 +1,5 @@
 <template>
-  <van-tabbar
-    v-model="active"
-    fixed
-    :placeholder="true"
-    :route="true"
-  >
+  <van-tabbar v-model="active" fixed :placeholder="true" :route="true">
     <van-tabbar-item
       v-for="(item, index) in tabbarData"
       :key="index"
@@ -40,7 +35,7 @@ export default {
       },
       {
         icon: 'user-o',
-        title: '关于',
+        title: '我的',
         to: {
           name: 'About'
         }
@@ -55,5 +50,4 @@ export default {
 </script>
 
 <style>
-
 </style>

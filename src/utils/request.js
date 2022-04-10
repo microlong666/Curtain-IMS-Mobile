@@ -37,7 +37,7 @@ service.interceptors.response.use(
   response => {
     const res = response
 
-    if (res.data.code === 200) {
+    if (res.data.code === 0 || res.data.code === 200) {
       const access_token = res.headers[setting.tokenHeaderName]
       if (access_token) {
         setting.cacheToken(access_token)

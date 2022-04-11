@@ -1,70 +1,76 @@
 <template>
-  <div class="content">
-    <van-cell-group inset>
-      <van-cell
-        :title="'账号: ' + userInfo.account"
-        :value="'注册时间: ' + createTime"
-      />
-      <van-cell center is-link>
-        <template #title>
-          <span @click="previewAvatar">头像</span>
-        </template>
-        <template #value>
-          <van-uploader :after-read="uploadAvatar">
-            <van-image
-              round
-              fit="cover"
-              width="80"
-              height="80"
-              src="/api/system/previewAvatar"
-            />
-          </van-uploader>
-        </template>
-      </van-cell>
-    </van-cell-group>
-    <van-form ref="userForm" @submit="onSubmit" class="form">
+  <van-pull-refresh
+    v-model="isLoading"
+    success-text="刷新成功"
+    @refresh="getUserInfo()"
+  >
+    <div class="content">
       <van-cell-group inset>
-        <van-field
-          label="姓名"
-          placeholder="姓名"
-          input-align="right"
-          v-model="form.name"
-          :rules="rules.name"
-          @update:model-value="showButton()"
-          is-link
+        <van-cell
+          :title="'账号: ' + userInfo.account"
+          :value="'注册时间: ' + createTime"
         />
-        <van-field
-          label="手机号"
-          placeholder="手机号"
-          input-align="right"
-          v-model="form.phone"
-          :rules="rules.phone"
-          @update:model-value="showButton()"
-          is-link
-        />
-        <van-field
-          label="地址"
-          placeholder="地址"
-          input-align="right"
-          v-model="form.address"
-          :rules="rules.address"
-          v-if="userInfo.roleName === '客户'"
-          class="van-ellipsis"
-          @update:model-value="showButton()"
-          is-link
-        />
+        <van-cell center is-link>
+          <template #title>
+            <span @click="previewAvatar">头像</span>
+          </template>
+          <template #value>
+            <van-uploader :after-read="uploadAvatar">
+              <van-image
+                round
+                fit="cover"
+                width="80"
+                height="80"
+                src="/api/system/previewAvatar"
+              />
+            </van-uploader>
+          </template>
+        </van-cell>
       </van-cell-group>
+      <van-form ref="userForm" @submit="onSubmit" class="form">
+        <van-cell-group inset>
+          <van-field
+            label="姓名"
+            placeholder="姓名"
+            input-align="right"
+            v-model="form.name"
+            :rules="rules.name"
+            @update:model-value="showButton()"
+            is-link
+          />
+          <van-field
+            label="手机号"
+            placeholder="手机号"
+            input-align="right"
+            v-model="form.phone"
+            :rules="rules.phone"
+            @update:model-value="showButton()"
+            is-link
+          />
+          <van-field
+            label="地址"
+            placeholder="地址"
+            input-align="right"
+            v-model="form.address"
+            :rules="rules.address"
+            v-if="userInfo.roleName === '客户'"
+            class="van-ellipsis"
+            @update:model-value="showButton()"
+            is-link
+          />
+        </van-cell-group>
 
-      <van-cell-group inset style="margin-top: 16px">
-        <van-cell title="修改密码" to="pwd" is-link />
-      </van-cell-group>
-      <div class="button" v-if="buttonShow">
-        <van-button native-type="submit" type="primary" size="large" round>
-          保 存
-        </van-button>
-      </div>
-    </van-form>
-  </div>
+        <van-cell-group inset style="margin-top: 16px">
+          <van-cell title="修改密码" to="pwd" is-link />
+        </van-cell-group>
+        <div class="button" v-if="buttonShow">
+          <van-button native-type="submit" type="primary" size="large" round>
+            保 存
+          </van-button>
+        </div>
+      </van-form>
+    </div>
+  </van-pull-refresh>
 </template>
 
 <script>
@@ -85,6 +91,7 @@ export default {
   inject: ['reload'],
   data() {
     return {
+      isLoading: false,
       buttonShow: false,
       userInfo: store.state.user.user,
       createTime: dayjs(store.state.user.user.createTime).format('YYYY-MM-DD'),
@@ -125,9 +132,11 @@ export default {
   },
   methods: {
     getUserInfo() {
+      this.isLoading = true
       getUserDetail().then((res) => {
         if (res.data.success) {
           this.form = res.data.data
+          this.isLoading = false
         }
       })
     },
@@ -163,6 +172,7 @@ export default {
             editUserInfo(qs.stringify(this.form))
               .then((res) => {
                 if (res.data.success) {
+                  this.$store.dispatch('user/setUser', this.form)
                   if (this.userInfo.roleName === '客户') {
                     this.form.id = this.form.customerId
                     editCustomer(qs.stringify(this.form))

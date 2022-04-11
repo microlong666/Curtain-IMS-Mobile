@@ -1,6 +1,6 @@
 <template>
   <div class="demo-content">
-    <img class="logo" alt="Vue logo" src="~@/assets/logo_vue3.png">
+    <img class="logo" alt="Vue logo" src="~@/assets/logo_vue3.png" />
     <div class="demo-content__title">
       <a href="https://github.com/yulimchen/vue3-h5-template" target="_blank">
         <svg-icon icon-class="github" />
@@ -87,16 +87,11 @@ export default {
     font-size: 14px;
     padding: 2px 10px;
     border-radius: 4px;
-    background-color: #eee;
     margin-top: 14px;
 
     p {
       line-height: 24px;
     }
-  }
-
-  .demo-main {
-
   }
 }
 </style>

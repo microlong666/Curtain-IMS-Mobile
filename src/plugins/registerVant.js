@@ -21,7 +21,8 @@ import {
   Tag,
   NavBar,
   Popup,
-  Picker
+  Picker,
+  PullRefresh
 } from 'vant'
 
 const componentList = [
@@ -47,7 +48,8 @@ const componentList = [
   Tag,
   NavBar,
   Popup,
-  Picker
+  Picker,
+  PullRefresh
 ]
 
 export function registerVantComp(app) {

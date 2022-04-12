@@ -23,14 +23,7 @@ export default {
         icon: 'wap-home-o',
         title: '主页',
         to: {
-          name: 'Demo'
-        }
-      },
-      {
-        icon: 'gem-o',
-        title: '工具',
-        to: {
-          name: 'Tools'
+          name: 'Home'
         }
       },
       {

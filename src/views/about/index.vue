@@ -32,7 +32,14 @@
       </van-cell>
     </van-cell-group>
     <van-cell-group class="cell" inset>
-      <van-cell title="单元格" value="内容" />
+      <van-grid square :column-num="4">
+        <van-grid-item icon="photo-o" text="待确认" />
+        <van-grid-item icon="photo-o" text="待受理" />
+        <van-grid-item icon="photo-o" text="待支付" />
+        <van-grid-item icon="photo-o" text="待安装" />
+      </van-grid>
+    </van-cell-group>
+    <van-cell-group class="cell" inset>
       <van-cell title="登出" @click="logOut" is-link />
     </van-cell-group>
   </div>

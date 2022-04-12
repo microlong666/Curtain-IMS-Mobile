@@ -120,7 +120,7 @@
 <script>
 import router from '@/router'
 import store from '@/store'
-import { login, signUp } from '@/api/user'
+import { login, signUp, getUserInfo } from '@/api/user'
 
 export default {
   name: 'Login',
@@ -226,11 +226,36 @@ export default {
                 token: res.data.data
               })
               .then(() => {
-                if (router.query && router.query.from) {
-                  router.push(String(router.query.from))
-                } else {
-                  router.push('/').catch(() => {})
-                }
+                // 获取用户信息
+                getUserInfo()
+                  .then((res) => {
+                    const result = res.data
+                    if (res.data.success) {
+                      const user = result.data
+                      this.$store.dispatch('user/setUser', user)
+                      this.$store.dispatch(
+                        'user/setRoles',
+                        user
+                          ? { roleId: user.roleId, roleName: user.roleName }
+                          : null
+                      )
+                      // 跳转
+                      if (router.query && router.query.from) {
+                        router.push(String(router.query.from))
+                      } else {
+                        router.push('/').catch(() => {})
+                      }
+                    } else if (result.message) {
+                      this.$toast.fail({
+                        message: result.message
+                      })
+                    }
+                  })
+                  .catch((error) => {
+                    this.$toast.fail({
+                      message: error.message
+                    })
+                  })
               })
           })
           .catch((error) => {

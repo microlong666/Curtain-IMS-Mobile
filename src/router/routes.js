@@ -14,22 +14,14 @@ const routes = [
     path: '/',
     name: 'root',
     component: Layout,
-    redirect: '/demo',
+    redirect: '/home',
     children: [
       {
-        path: '/demo',
-        name: 'Demo',
-        component: () => import('@/views/demo'),
+        path: '/home',
+        name: 'Home',
+        component: () => import('@/views/home'),
         meta: {
           title: '主页'
-        }
-      },
-      {
-        path: '/tools',
-        name: 'Tools',
-        component: () => import('@/views/tools'),
-        meta: {
-          title: '工具'
         }
       },
       {
@@ -37,8 +29,7 @@ const routes = [
         name: 'About',
         component: () => import('@/views/about'),
         meta: {
-          title: '我的',
-          noCache: true
+          title: '我的'
         }
       }
     ]
@@ -53,8 +44,7 @@ const routes = [
         name: 'UserInfo',
         component: () => import('@/views/about/info.vue'),
         meta: {
-          title: '个人资料',
-          noCache: true
+          title: '个人资料'
         }
       },
       {

@@ -17,7 +17,6 @@
 import Tabbar from '@/components/Tabbar'
 import { computed } from 'vue'
 import store from '@/store'
-import { getUserInfo } from '@/api/user'
 
 export default {
   name: 'Layout',
@@ -29,35 +28,6 @@ export default {
 
     return {
       keepAliveRoutes
-    }
-  },
-  created() {
-    this.getCurrentUserinfo()
-  },
-  methods: {
-    // 获取当前用户信息
-    getCurrentUserinfo() {
-      getUserInfo()
-        .then((res) => {
-          const result = res.data
-          if (res.data.success) {
-            const user = result.data
-            this.$store.dispatch('user/setUser', user)
-            this.$store.dispatch(
-              'user/setRoles',
-              user ? { roleId: user.roleId, roleName: user.roleName } : null
-            )
-          } else if (result.message) {
-            this.$toast.fail({
-              message: result.message
-            })
-          }
-        })
-        .catch((error) => {
-          this.$toast.fail({
-            message: error.message
-          })
-        })
     }
   }
 }

@@ -157,7 +157,7 @@ export default {
       }
     },
     previewAvatar() {
-      ImagePreview(['/api/system/previewAvatar'])
+      ImagePreview({ images: ['/api/system/previewAvatar'], closeable: true })
     },
     showButton() {
       this.buttonShow = true

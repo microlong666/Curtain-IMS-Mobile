@@ -5,9 +5,15 @@
       欢迎登入！请点击下方探索更多功能！
     </van-notice-bar>
     <van-cell-group class="cell" inset>
-      <van-swipe :autoplay="3000" lazy-render>
+      <van-swipe :autoplay="3000" lazy-render @change="onChange">
         <van-swipe-item v-for="image in images">
-          <van-image width="100%" height="100%" :src="image" fit="cover" />
+          <van-image
+            width="100%"
+            height="100%"
+            :src="image"
+            fit="cover"
+            @click="previewImages"
+          />
         </van-swipe-item>
       </van-swipe>
     </van-cell-group>
@@ -38,10 +44,12 @@
 
 <script>
 import store from '@/store'
+import { ImagePreview } from 'vant'
 export default {
   name: 'Home',
   data() {
     return {
+      currentIndex: 1,
       userInfo: store.state.user.user,
       images: [
         require('@/assets/images/1.jpg'),
@@ -51,6 +59,18 @@ export default {
         require('@/assets/images/5.jpg'),
         require('@/assets/images/6.jpg')
       ]
+    }
+  },
+  methods: {
+    onChange(index) {
+      this.currentIndex = index
+    },
+    previewImages() {
+      ImagePreview({
+        images: this.images,
+        closeable: true,
+        startPosition: this.currentIndex
+      })
     }
   }
 }

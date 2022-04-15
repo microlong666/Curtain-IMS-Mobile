@@ -1,5 +1,6 @@
 <template>
   <van-pull-refresh
+    class="refresh"
     v-model="isLoading"
     success-text="刷新成功"
     @refresh="getUserInfo()"
@@ -209,6 +210,12 @@ export default {
 </script>
 
 <style scoped>
+.refresh {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .content,
 .form {
   padding: var(--van-padding-md) 0;

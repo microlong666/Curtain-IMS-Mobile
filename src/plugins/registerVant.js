@@ -25,7 +25,12 @@ import {
   PullRefresh,
   Grid,
   GridItem,
-  Skeleton
+  Skeleton,
+  SwipeCell,
+  List,
+  Search,
+  DropdownMenu,
+  DropdownItem
 } from 'vant'
 
 const componentList = [
@@ -55,7 +60,12 @@ const componentList = [
   PullRefresh,
   Grid,
   GridItem,
-  Skeleton
+  Skeleton,
+  SwipeCell,
+  List,
+  Search,
+  DropdownMenu,
+  DropdownItem
 ]
 
 export function registerVantComp(app) {

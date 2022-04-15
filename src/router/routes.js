@@ -55,42 +55,42 @@ const routes = [
           title: '修改密码',
           noCache: true
         }
-      }
+      },
+      {
+        path: '/need',
+        name: 'Need',
+        // component: () => import('@/views/need'),
+        meta: {
+          title: '需求登记'
+        }
+      },
+      {
+        path: '/order',
+        name: 'Order',
+        component: () => import('@/views/order'),
+        meta: {
+          title: '订单管理'
+        }
+      },
+      {
+        path: '/customer',
+        name: 'Customer',
+        // component: () => import('@/views/customer'),
+        meta: {
+          title: '客户管理',
+          roles: ['超级管理员', '系统管理员']
+        }
+      },
+      {
+        path: '/supplier',
+        name: 'Supplier',
+        // component: () => import('@/views/supplier'),
+        meta: {
+          title: '供应商管理',
+          roles: ['超级管理员', '系统管理员']
+        }
+      },
     ]
-  },
-  {
-    path: '/need',
-    name: 'Need',
-    // component: () => import('@/views/need'),
-    meta: {
-      title: '需求登记'
-    }
-  },
-  {
-    path: '/order',
-    name: 'Order',
-    // component: () => import('@/views/order'),
-    meta: {
-      title: '订单管理'
-    }
-  },
-  {
-    path: '/customer',
-    name: 'Customer',
-    // component: () => import('@/views/customer'),
-    meta: {
-      title: '客户管理',
-      roles: ['超级管理员', '系统管理员']
-    }
-  },
-  {
-    path: '/supplier',
-    name: 'Supplier',
-    // component: () => import('@/views/supplier'),
-    meta: {
-      title: '供应商管理',
-      roles: ['超级管理员', '系统管理员']
-    }
   },
   {
     path: '/items',

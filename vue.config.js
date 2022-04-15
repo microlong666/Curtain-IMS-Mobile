@@ -10,7 +10,7 @@ function resolve(dir) {
 }
 
 const defaultSettings = require('./src/settings.js')
-const name = defaultSettings.title || 'Vue3 H5 Template'
+const name = defaultSettings.title || '窗帘管理系统'
 
 // 设置不参与构建的库
 const externals = {}

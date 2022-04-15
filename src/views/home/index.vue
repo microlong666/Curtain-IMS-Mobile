@@ -20,23 +20,23 @@
     <van-cell-group class="grid" inset>
       <van-grid square :column-num="3">
         <van-grid-item
-          icon="photo-o"
+          icon="friends-o"
           text="客户管理"
           v-if="userInfo.roleName !== '客户'"
         />
         <van-grid-item
-          icon="photo-o"
+          icon="logistics"
           text="供应商管理"
           v-if="userInfo.roleName !== '客户'"
         />
         <van-grid-item
-          icon="photo-o"
+          icon="apps-o"
           text="物料管理"
           v-if="userInfo.roleName !== '客户'"
         />
-        <van-grid-item icon="photo-o" text="需求管理" />
-        <van-grid-item icon="photo-o" text="订单管理" />
-        <van-grid-item icon="photo-o" text="个人资料" to="/about/info" />
+        <van-grid-item icon="records" text="需求管理" />
+        <van-grid-item icon="shopping-cart-o" text="订单管理" to="order" />
+        <van-grid-item icon="setting-o" text="个人资料" to="/about/info" />
       </van-grid>
     </van-cell-group>
   </div>

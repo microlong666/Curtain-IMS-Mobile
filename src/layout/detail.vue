@@ -10,9 +10,11 @@
     </div>
     <div class="app-wrapper__content">
       <router-view v-if="isRouterAlive" v-slot="{ Component }">
-        <keep-alive :include="keepAliveRoutes">
-          <component :is="Component" style="width: 100%" />
-        </keep-alive>
+        <transition mode="out-in" name="van-fade">
+          <keep-alive :include="keepAliveRoutes">
+            <component :is="Component" style="width: 100%" />
+          </keep-alive>
+        </transition>
       </router-view>
     </div>
   </div>
@@ -71,5 +73,6 @@ export default {
 .app-wrapper__content {
   display: flex;
   flex: 1;
+  flex-direction: column;
 }
 </style>

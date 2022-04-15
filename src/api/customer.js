@@ -7,7 +7,7 @@ export function getCustomerDetail(data) {
   return request({
     url: '/clCustomer/detail',
     method: 'get',
-    data
+    params: data
   })
 }
 

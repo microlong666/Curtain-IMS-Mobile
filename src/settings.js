@@ -1,3 +1,3 @@
 module.exports = {
-  title: 'Vue3 H5 Template'
+  title: '窗帘管理系统'
 }

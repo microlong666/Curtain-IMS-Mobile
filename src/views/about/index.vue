@@ -32,10 +32,20 @@
     </van-cell-group>
     <van-cell-group class="cell" inset>
       <van-grid square :column-num="4">
-        <van-grid-item icon="photo-o" text="待确认" />
-        <van-grid-item icon="photo-o" text="待受理" />
-        <van-grid-item icon="photo-o" text="待支付" />
-        <van-grid-item icon="photo-o" text="待安装" />
+        <van-grid-item icon="sign" text="待确认" :badge="toConfirm" />
+        <van-grid-item icon="todo-list-o" text="待受理" :badge="toDo" />
+        <van-grid-item
+          icon="paid"
+          text="待支付"
+          :badge="toPay"
+          :to="{ path: '/order', query: { status: 2 } }"
+        />
+        <van-grid-item
+          icon="guide-o"
+          text="待安装"
+          :badge="toLaunch"
+          :to="{ path: '/order', query: { status: 3 } }"
+        />
       </van-grid>
     </van-cell-group>
     <van-cell-group class="cell" inset>
@@ -51,6 +61,10 @@ export default {
   name: 'About',
   data() {
     return {
+      toConfirm: null,
+      toDo: null,
+      toPay: null,
+      toLaunch: null,
       userInfo: store.state.user.user
     }
   },
@@ -84,10 +98,6 @@ export default {
 </script>
 
 <style scoped>
-/* .van-button {
-  width: 120px;
-  height: 40px;
-} */
 .content {
   padding: var(--van-padding-md) 0;
 }

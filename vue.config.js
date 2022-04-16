@@ -24,7 +24,7 @@ const cdn = {
 
 module.exports = {
   lintOnSave: true,
-  publicPath: '/',
+  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   productionSourceMap: false, // 去除生产环境.map文件
   configureWebpack: (config) => {
     const configNew = {

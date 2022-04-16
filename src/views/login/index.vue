@@ -118,7 +118,6 @@
 </template>
 
 <script>
-import router from '@/router'
 import store from '@/store'
 import { login, signUp, getUserInfo } from '@/api/user'
 
@@ -240,10 +239,10 @@ export default {
                           : null
                       )
                       // 跳转
-                      if (router.query && router.query.from) {
-                        router.push(String(router.query.from))
+                      if (this.$router.query && this.$router.query.from) {
+                        this.$router.push(String(this.$router.query.from))
                       } else {
-                        router.push('/').catch(() => {})
+                        this.$router.push('/').catch(() => {})
                       }
                     } else if (result.message) {
                       this.$toast.fail({

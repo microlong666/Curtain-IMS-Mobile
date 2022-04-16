@@ -6,7 +6,7 @@
     </van-notice-bar>
     <van-cell-group class="cell" inset>
       <van-swipe :autoplay="3000" lazy-render @change="onChange">
-        <van-swipe-item v-for="image in images">
+        <van-swipe-item v-for="image in images" :key="image">
           <van-image
             width="100%"
             height="100%"

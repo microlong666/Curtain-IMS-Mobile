@@ -16,22 +16,19 @@ router.beforeEach((to, from, next) => {
   setPageTitle(to.meta.title)
 
   // 判断是否登录 或者跳转的路径在白名单
-  if (setting.takeToken() || setting.whiteList.includes(to.path)) {
-    // 角色权限控制
-    if (to.meta.roles) {
-      if (to.meta.roles.includes(store.state.user.user.roleName)) {
-        // 放行
-        next()
-      } else {
-        next({ path: '/404' })
-      }
-    } else {
-      next()
-    }
-  } else {
+  if (!setting.takeToken() && !setting.whiteList.includes(to.path)) {
     // 其他情况（没有登录，也没再白名单地址）
     // 未登录跳转登录页面
-    next({ path: '/login', query: to.path === '/' ? {} : { from: to.path } })
+    next({ path: '/login' })
+  }
+
+  // 角色权限控制
+  if (to.meta.roles) {
+    if (!to.meta.roles.includes(store.state.user.user.roleName)) {
+      next({ path: '/404' })
+    }
+  } else {
+    next()
   }
 })
 

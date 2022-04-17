@@ -5,7 +5,7 @@ export default {
   // 不显示全局页脚的路由
   hideFooters: ['/system/dictionary', '/system/organization'],
   // 不需要登录的路由
-  whiteList: ['/login', '/forget', '/sso'],
+  whiteList: ['/login'],
   // 菜单数据接口
   menuUrl: '/sysMenu/getLeftMenusAntdv',
   // 自定义解析菜单接口数据

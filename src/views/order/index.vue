@@ -24,28 +24,31 @@
           :finished="finished"
           finished-text="没有更多了"
           @load="onLoad"
-          v-if="true"
         >
           <van-swipe-cell class="cell" v-for="item in orderList" :key="item">
             <van-cell-group inset>
-              <van-cell center :value="item.customerName" is-link>
+              <van-cell center is-link :to="'/order/detail/' + item.id">
                 <template #title>
-                  <span>{{ '订单编号: ' + item.id }}</span>
-                  <van-tag :type="tagConvert(item.status)" class="tag">
-                    {{ item.status }}
-                  </van-tag>
+                  <span class="title">{{ item.customerName }}</span>
+                  <span class="title">{{ '订单编号: ' + item.id }}</span>
                 </template>
                 <template #label>
                   <span>{{ item.createTime }}</span>
                 </template>
+                <template #value>
+                  <van-tag :type="tagConvert(item.status)" class="tag">
+                    {{ item.status }}
+                  </van-tag>
+                </template>
               </van-cell>
             </van-cell-group>
-            <template #left>
+            <template #left v-if="userInfo.roleName !== '客户'">
               <van-button
                 square
                 type="primary"
                 text="版本"
                 style="height: 100%"
+                :to="'/order/version/' + item.id"
               />
             </template>
             <template #right v-if="userInfo.roleName !== '客户'">
@@ -54,6 +57,12 @@
                 type="primary"
                 text="变更"
                 style="height: 100%"
+                @click="
+                  () => {
+                    show = true
+                    orderId = item.id
+                  }
+                "
               />
               <van-button
                 square
@@ -65,30 +74,47 @@
             </template>
           </van-swipe-cell>
         </van-list>
-        <van-empty description="暂无内容" v-else />
       </div>
     </van-pull-refresh>
+    <van-action-sheet
+      v-model:show="show"
+      :actions="actions"
+      cancel-text="取消"
+      @select="onSelect"
+    />
   </div>
 </template>
 
 <script>
 import { getCustomerDetail } from '@/api/customer'
-import { getOrderList } from '@/api/order'
+import { getOrderList, editOrder, deleteOrder } from '@/api/order'
 import store from '@/store'
 import dayjs from 'dayjs'
+import qs from 'qs'
 
 export default {
   name: 'Order',
   inject: ['reload'],
   data() {
     return {
+      show: false,
+      orderId: null,
+      actions: [
+        { name: '待确认' },
+        { name: '待加工' },
+        { name: '待支付' },
+        { name: '待安装' },
+        { name: '完成' }
+      ],
       loading: false,
       finished: false,
       refreshing: false,
       statusType: 'primary',
       params: {
         id: null,
-        status: this.$route.query.status ? Number(this.$route.query.status) : ''
+        status: this.$route.params.status
+          ? Number(this.$route.params.status)
+          : ''
       },
       statusOptions: [
         { text: '全部', value: '' },
@@ -163,19 +189,69 @@ export default {
       this.loading = true
       this.onLoad()
     },
+    onSelect(item) {
+      let status = null
+      switch (item.name) {
+        case '待确认':
+          status = 0
+          break
+        case '待加工':
+          status = 1
+          break
+        case '待支付':
+          status = 2
+          break
+        case '待安装':
+          status = 3
+          break
+        case '完成':
+          status = 4
+      }
+      editOrder(qs.stringify({ id: this.orderId, status: status }))
+        .then((res) => {
+          if (res.data.success) {
+            this.$toast.success({
+              message: '变更成功'
+            })
+            this.orderId = null
+            this.show = false
+            this.onRefresh()
+          }
+        })
+        .catch((error) => {
+          this.$toast.fail({
+            message: '变更失败，' + error.message
+          })
+        })
+    },
     deleteOrder(id) {
       this.$dialog
         .confirm({
           message: '确认删除此订单？'
         })
-        .then(() => {})
+        .then(() => {
+          deleteOrder(qs.stringify({ id: id }))
+            .then((res) => {
+              if (res.data.success) {
+                this.$toast.success({
+                  message: '删除成功'
+                })
+                this.onRefresh()
+              }
+            })
+            .catch((error) => {
+              this.$toast.fail({
+                message: '删除失败，' + error.message
+              })
+            })
+        })
         .catch(() => {})
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .block,
 .refresh {
   display: flex;
@@ -207,6 +283,11 @@ export default {
 
 .cell {
   margin-bottom: var(--van-padding-md);
+}
+
+.title {
+  width: 100%;
+  display: inline-block;
 }
 
 .tag {

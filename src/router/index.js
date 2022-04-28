@@ -26,6 +26,8 @@ router.beforeEach((to, from, next) => {
   if (to.meta.roles) {
     if (!to.meta.roles.includes(store.state.user.user.roleName)) {
       next({ path: '/404' })
+    } else {
+      next()
     }
   } else {
     next()

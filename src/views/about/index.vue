@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <van-cell-group class="cell" inset>
+    <van-cell-group inset>
       <van-cell
         size="large"
         class="userInfo"
@@ -30,45 +30,117 @@
         </template>
       </van-cell>
     </van-cell-group>
-    <van-cell-group class="cell" inset>
-      <van-grid square :column-num="4">
-        <van-grid-item icon="sign" text="待确认" :badge="toConfirm" />
-        <van-grid-item icon="todo-list-o" text="待受理" :badge="toDo" />
+    <van-cell-group title="我的需求" inset>
+      <van-grid square :column-num="4" :clickable="true">
+        <van-grid-item
+          icon="sign"
+          text="待确认"
+          :badge="need.toConfirm"
+          to="/need/0"
+        />
+        <van-grid-item
+          icon="todo-list-o"
+          text="待受理"
+          :badge="need.toDo"
+          to="/need/1"
+        />
+        <van-grid-item
+          icon="smile-o"
+          text="已受理"
+          :badge="need.done"
+          to="/need/2"
+        />
+        <van-grid-item
+          icon="close"
+          text="已关闭"
+          :badge="need.closed"
+          to="/need/3"
+        />
+      </van-grid>
+    </van-cell-group>
+    <van-cell-group title="我的订单" inset>
+      <van-grid square :column-num="4" :clickable="true">
+        <van-grid-item
+          icon="sign"
+          text="待确认"
+          :badge="order.toConfirm"
+          to="/order/0"
+        />
         <van-grid-item
           icon="paid"
           text="待支付"
-          :badge="toPay"
-          :to="{ path: '/order', query: { status: 2 } }"
+          :badge="order.toPay"
+          to="/order/2"
         />
         <van-grid-item
           icon="guide-o"
           text="待安装"
-          :badge="toLaunch"
-          :to="{ path: '/order', query: { status: 3 } }"
+          :badge="order.toLaunch"
+          to="/order/3"
+        />
+        <van-grid-item
+          icon="smile-o"
+          text="已完成"
+          :badge="order.done"
+          to="/order/4"
         />
       </van-grid>
     </van-cell-group>
-    <van-cell-group class="cell" inset>
+    <van-cell-group class="logOut" inset>
       <van-cell title="登出" @click="logOut" is-link />
     </van-cell-group>
   </div>
 </template>
 
 <script>
+import { getNeedCount } from '@/api/need'
+import { getOrderCount } from '@/api/order'
 import { logOut } from '@/api/user'
 import store from '@/store'
 export default {
   name: 'About',
   data() {
     return {
-      toConfirm: null,
-      toDo: null,
-      toPay: null,
-      toLaunch: null,
+      need: {
+        toConfirm: null,
+        toDo: null,
+        done: null,
+        closed: null
+      },
+      order: {
+        toConfirm: null,
+        toPay: null,
+        toLaunch: null,
+        done: null
+      },
       userInfo: store.state.user.user
     }
   },
+  created() {
+    this.getNeedCount()
+    this.getOrderCount()
+  },
   methods: {
+    async getNeedCount() {
+      let res = await getNeedCount()
+      if (res.data.success) {
+        const data = res.data.data
+        this.need.toConfirm = data.toConfirm !== 0 ? data.toConfirm : null
+        this.need.toDo = data.toDo !== 0 ? data.toDo : null
+        this.need.done = data.done !== 0 ? data.done : null
+        this.need.closed = data.closed !== 0 ? data.closed : null
+      }
+    },
+    async getOrderCount() {
+      let res = await getOrderCount()
+      if (res.data.success) {
+        const data = res.data.data
+        this.order.toConfirm = data.toConfirm !== 0 ? data.toConfirm : null
+        this.order.toPay = data.toPay !== 0 ? data.toPay : null
+        this.order.toLaunch = data.toLaunch !== 0 ? data.toLaunch : null
+        this.order.done = data.done !== 0 ? data.done : null
+      }
+    },
     logOut() {
       // 退出登录
       this.$dialog
@@ -102,7 +174,8 @@ export default {
   padding: var(--van-padding-md) 0;
 }
 
-.cell {
+.logOut {
+  margin-top: var(--van-padding-md);
   margin-bottom: var(--van-padding-md);
 }
 

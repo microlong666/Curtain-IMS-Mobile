@@ -18,23 +18,25 @@
       </van-swipe>
     </van-cell-group>
     <van-cell-group class="grid" inset>
-      <van-grid square :column-num="3">
+      <van-grid square :column-num="3" :clickable="true">
         <van-grid-item
+          v-if="userInfo.roleName !== '客户'"
           icon="friends-o"
           text="客户管理"
-          v-if="userInfo.roleName !== '客户'"
+          to="customer"
         />
         <van-grid-item
+          v-if="userInfo.roleName !== '客户'"
           icon="logistics"
           text="供应商管理"
-          v-if="userInfo.roleName !== '客户'"
+          to="supplier"
         />
         <van-grid-item
+          v-if="userInfo.roleName !== '客户'"
           icon="apps-o"
           text="物料管理"
-          v-if="userInfo.roleName !== '客户'"
         />
-        <van-grid-item icon="records" text="需求管理" />
+        <van-grid-item icon="records" text="需求管理" to="need" />
         <van-grid-item icon="shopping-cart-o" text="订单管理" to="order" />
         <van-grid-item icon="setting-o" text="个人资料" to="/about/info" />
       </van-grid>

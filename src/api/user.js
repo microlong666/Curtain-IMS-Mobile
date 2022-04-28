@@ -49,6 +49,18 @@ export function getUserDetail() {
 }
 
 /**
+ * 用户信息
+ * @returns
+ */
+export function getUserName(data) {
+  return request({
+    url: '/mgr/getUserInfo',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
  * 修改密码
  * @returns
  */

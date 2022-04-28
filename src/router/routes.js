@@ -57,15 +57,15 @@ const routes = [
         }
       },
       {
-        path: '/need',
+        path: '/need/:status?',
         name: 'Need',
-        // component: () => import('@/views/need'),
+        component: () => import('@/views/need'),
         meta: {
           title: '需求登记'
         }
       },
       {
-        path: '/order',
+        path: '/order/:status?',
         name: 'Order',
         component: () => import('@/views/order'),
         meta: {
@@ -73,9 +73,27 @@ const routes = [
         }
       },
       {
+        path: '/order/detail/:id',
+        name: 'OrderDetail',
+        component: () => import('@/views/order/detail.vue'),
+        meta: {
+          title: '订单详细',
+          noCache: true
+        }
+      },
+      {
+        path: '/order/version/:id',
+        name: 'OrderVesion',
+        component: () => import('@/views/order/version.vue'),
+        meta: {
+          title: '订单记录',
+          noCache: true
+        }
+      },
+      {
         path: '/customer',
         name: 'Customer',
-        // component: () => import('@/views/customer'),
+        component: () => import('@/views/customer'),
         meta: {
           title: '客户管理',
           roles: ['超级管理员', '系统管理员']
@@ -84,12 +102,12 @@ const routes = [
       {
         path: '/supplier',
         name: 'Supplier',
-        // component: () => import('@/views/supplier'),
+        component: () => import('@/views/supplier'),
         meta: {
           title: '供应商管理',
           roles: ['超级管理员', '系统管理员']
         }
-      },
+      }
     ]
   },
   {

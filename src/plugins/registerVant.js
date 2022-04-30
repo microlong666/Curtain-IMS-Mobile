@@ -35,7 +35,9 @@ import {
   Steps,
   Collapse,
   CollapseItem,
-  ActionSheet
+  ActionSheet,
+  Tab,
+  Tabs
 } from 'vant'
 
 const componentList = [
@@ -75,7 +77,9 @@ const componentList = [
   Steps,
   Collapse,
   CollapseItem,
-  ActionSheet
+  ActionSheet,
+  Tab,
+  Tabs
 ]
 
 export function registerVantComp(app) {

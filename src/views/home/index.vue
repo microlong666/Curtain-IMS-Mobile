@@ -35,6 +35,7 @@
           v-if="userInfo.roleName !== '客户'"
           icon="apps-o"
           text="物料管理"
+          to="items"
         />
         <van-grid-item icon="records" text="需求管理" to="need" />
         <van-grid-item icon="shopping-cart-o" text="订单管理" to="order" />

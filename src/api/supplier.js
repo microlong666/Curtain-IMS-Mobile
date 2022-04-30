@@ -10,3 +10,14 @@ export function getSupplierList(data) {
     params: data
   })
 }
+
+/**
+ * 获取供应商详情
+ */
+export function getSupplierDetail(data) {
+  return request({
+    url: '/clSupplier/detail',
+    method: 'get',
+    params: data
+  })
+}

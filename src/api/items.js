@@ -3,6 +3,83 @@ import request from '@/utils/request'
 /**
  * 获取导轨信息
  */
+export function getTrackList(data) {
+  return request({
+    url: '/clTrack/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取成品帘信息
+ */
+export function getCurtainList(data) {
+  return request({
+    url: '/clCurtain/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取主布信息
+ */
+export function getMainFabricList(data) {
+  return request({
+    url: '/clMainFabric/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取里布信息
+ */
+export function getInsideFabricList(data) {
+  return request({
+    url: '/clInsideFabric/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取窗纱信息
+ */
+export function getSheerList(data) {
+  return request({
+    url: '/clSheerCurtain/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取配件信息
+ */
+export function getAccessoryList(data) {
+  return request({
+    url: '/clAccessory/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取辅料信息
+ */
+export function getAdjuvantList(data) {
+  return request({
+    url: '/clAdjuvant/list',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取导轨信息
+ */
 export function getTrackInfo(data) {
   return request({
     url: '/clTrack/info',

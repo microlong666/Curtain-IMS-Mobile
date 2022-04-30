@@ -1,6 +1,6 @@
 <template>
   <div class="load" v-if="loading">
-    <van-loading color="#0094ff" vertical>加载中...</van-loading>
+    <van-loading color="#1989fa" vertical>加载中...</van-loading>
   </div>
   <div class="content" v-else>
     <van-steps :active="orderInfo.status + 1" active-color="#38f">

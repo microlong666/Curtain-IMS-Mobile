@@ -108,6 +108,76 @@ const routes = [
           title: '供应商管理',
           roles: ['超级管理员', '系统管理员']
         }
+      },
+      {
+        path: '/curtain/:id',
+        name: 'CurtainDetail',
+        component: () => import('@/views/items/curtain/detail.vue'),
+        meta: {
+          title: '成品帘详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/mainFabric/:id',
+        name: 'MainFabricDetail',
+        component: () => import('@/views/items/mainFabric/detail.vue'),
+        meta: {
+          title: '主布详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/insideFabric/:id',
+        name: 'InsideFabricDetail',
+        component: () => import('@/views/items/insideFabric/detail.vue'),
+        meta: {
+          title: '里布详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/sheerCurtain/:id',
+        name: 'SheerCurtainDetail',
+        component: () => import('@/views/items/sheerCurtain/detail.vue'),
+        meta: {
+          title: '窗纱详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/track/:id',
+        name: 'TrackDetail',
+        component: () => import('@/views/items/track/detail.vue'),
+        meta: {
+          title: '导轨详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/accessory/:id',
+        name: 'AccessoryDetail',
+        component: () => import('@/views/items/accessory/detail.vue'),
+        meta: {
+          title: '配件详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/adjuvant/:id',
+        name: 'AdjuvantDetail',
+        component: () => import('@/views/items/adjuvant/detail.vue'),
+        meta: {
+          title: '辅料详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
       }
     ]
   },

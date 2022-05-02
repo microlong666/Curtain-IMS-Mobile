@@ -9,7 +9,12 @@
           @click-left="$router.push('home')"
         />
         <van-tabs v-model:active="active" color="#1989fa" animated>
-          <van-tab v-for="item in tabList" :title="item.title" :to="item.to" />
+          <van-tab
+            v-for="item in tabList"
+            :title="item.title"
+            :name="item.name"
+            :to="item.to"
+          />
         </van-tabs>
       </van-sticky>
     </div>
@@ -27,6 +32,7 @@
 
 <script>
 import { ref, reactive, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import store from '@/store'
 
 export default {
@@ -38,34 +44,42 @@ export default {
   },
   setup() {
     const keepAliveRoutes = computed(() => store.getters.cachedViews)
-    const active = ref(0)
+    const route = useRoute()
+    const active = ref(route.name)
     const tabList = reactive([
       {
         title: '成品帘',
+        name: 'Curtain',
         to: 'curtain'
       },
       {
         title: '主布',
+        name: 'MainFabric',
         to: 'mainFabric'
       },
       {
         title: '里布',
+        name: 'InsideFabric',
         to: 'insideFabric'
       },
       {
         title: '窗纱',
+        name: 'SheerCurtain',
         to: 'sheerCurtain'
       },
       {
         title: '导轨',
+        name: 'Track',
         to: 'track'
       },
       {
         title: '配件',
+        name: 'Accessory',
         to: 'accessory'
       },
       {
         title: '辅料',
+        name: 'Adjuvant',
         to: 'adjuvant'
       }
     ])

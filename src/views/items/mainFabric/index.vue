@@ -37,6 +37,7 @@
                 :title="item.name"
                 :label="item.model"
                 :value="item.supplierName"
+                :to="'/mainFabric/' + item.id"
                 is-link
               >
               </van-cell>

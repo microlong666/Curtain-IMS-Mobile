@@ -33,6 +33,7 @@
                 :title="item.name"
                 :label="item.model"
                 :value="item.supplierName"
+                :to="'/track/' + item.id"
                 is-link
               >
               </van-cell>

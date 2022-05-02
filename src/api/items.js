@@ -80,6 +80,17 @@ export function getAdjuvantList(data) {
 /**
  * 获取导轨信息
  */
+export function getTrackDetail(data) {
+  return request({
+    url: '/clTrack/detail',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取导轨信息
+ */
 export function getTrackInfo(data) {
   return request({
     url: '/clTrack/info',
@@ -127,6 +138,17 @@ export function getInsideFabricDetail(data) {
 export function getSheerDetail(data) {
   return request({
     url: '/clSheerCurtain/detail',
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 获取配件信息
+ */
+export function getAccessoryDetail(data) {
+  return request({
+    url: '/clAccessory/detail',
     method: 'get',
     params: data
   })

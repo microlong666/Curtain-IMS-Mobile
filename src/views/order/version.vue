@@ -111,7 +111,7 @@ export default {
       })
     },
     async getVersion() {
-      let res = await getOrderVersion({ orderId: this.orderId })
+      const res = await getOrderVersion({ orderId: this.orderId })
       for (const version of res.data?.data) {
         const versionData = {}
         versionData.updateUser = await this.getUserName(version.updateUser)

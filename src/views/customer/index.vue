@@ -30,25 +30,47 @@
             <van-cell-group inset>
               <van-cell
                 center
-                :title="item.name"
                 :label="item.address"
-                :value="item.phone"
+                :to="'/customer/detail/' + item.id"
                 is-link
               >
+                <template #title>
+                  <span class="title">{{ item.name }}</span>
+                  <span class="title">{{ item.phone }}</span>
+                </template>
+                <template #value>
+                  <van-tag
+                    :type="item.userId ? 'primary' : 'danger'"
+                    class="tag"
+                  >
+                    {{ item.userId ? '已关联' : '未关联' }}
+                  </van-tag>
+                </template>
               </van-cell>
             </van-cell-group>
+            <template #left v-if="!item.userId">
+              <van-button
+                square
+                type="primary"
+                text="生成账号"
+                style="height: 100%"
+                @click="createAccount(item.id)"
+              />
+            </template>
             <template #right>
               <van-button
                 square
                 type="primary"
                 text="修改"
                 style="height: 100%"
+                :to="'/customer/form/' + item.id"
               />
               <van-button
                 square
                 type="danger"
                 text="删除"
                 style="height: 100%"
+                @click="deleteCustomer(item.id)"
               />
             </template>
           </van-swipe-cell>
@@ -59,7 +81,8 @@
 </template>
 
 <script>
-import { getCustomerList } from '@/api/customer'
+import { getCustomerList, createAccount, deleteCustomer } from '@/api/customer'
+import qs from 'qs'
 
 export default {
   name: 'Customer',
@@ -77,7 +100,7 @@ export default {
     }
   },
   created() {
-    this.$emit('setter', { rightText: '添加', route: '/customer/add' })
+    this.$emit('setter', { rightText: '添加', route: '/customer/form' })
   },
   methods: {
     // List 加载
@@ -103,6 +126,56 @@ export default {
       this.finished = false
       this.loading = true
       this.onLoad()
+    },
+    createAccount(id) {
+      this.$dialog
+        .confirm({
+          title: '确定为该客户生成账号？'
+        })
+        .then(() => {
+          createAccount(qs.stringify({ id: id, isCreateAccount: true }))
+            .then((res) => {
+              if (res.data.success) {
+                this.$toast.success({
+                  message: '生成账号成功'
+                })
+                this.reload()
+              } else {
+                this.$toast.success({
+                  message: '生成账号失败'
+                })
+              }
+            })
+            .catch((error) => {
+              this.$toast.fail({
+                message: error.message
+              })
+            })
+        })
+        .catch(() => {})
+    },
+    deleteCustomer(id) {
+      this.$dialog
+        .confirm({
+          message: '确认删除此客户？'
+        })
+        .then(() => {
+          deleteCustomer(qs.stringify({ id: id }))
+            .then((res) => {
+              if (res.data.success) {
+                this.$toast.success({
+                  message: '删除成功'
+                })
+                this.onRefresh()
+              }
+            })
+            .catch((error) => {
+              this.$toast.fail({
+                message: '删除失败，' + error.message
+              })
+            })
+        })
+        .catch(() => {})
     }
   }
 }
@@ -123,5 +196,9 @@ export default {
 
 .cell {
   margin-bottom: var(--van-padding-md);
+}
+
+.title {
+  display: block;
 }
 </style>

@@ -21,3 +21,36 @@ export function getSupplierDetail(data) {
     params: data
   })
 }
+
+/**
+ * 添加供应商
+ */
+export function addSupplier(data) {
+  return request({
+    url: '/clSupplier/addItem',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 修改供应商
+ */
+export function editSupplier(data) {
+  return request({
+    url: '/clSupplier/editItem',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 删除供应商
+ */
+export function deleteSupplier(data) {
+  return request({
+    url: '/clSupplier/delete',
+    method: 'post',
+    data
+  })
+}

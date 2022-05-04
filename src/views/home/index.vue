@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <van-nav-bar title="俪松居" />
+    <van-nav-bar title="窗帘销售管理系统" />
     <van-notice-bar left-icon="volume-o" scrollable mode="closeable">
       欢迎登入！请点击下方探索更多功能！
     </van-notice-bar>

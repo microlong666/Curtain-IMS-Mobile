@@ -55,7 +55,9 @@
             v-model="form.address"
             :rules="rules.address"
             v-if="userInfo.roleName === '客户'"
-            class="van-ellipsis"
+            rows="1"
+            autosize
+            type="textarea"
             @update:model-value="showButton()"
             is-link
           />
@@ -65,7 +67,7 @@
           <van-cell title="修改密码" to="pwd" is-link />
         </van-cell-group>
         <div class="button" v-if="buttonShow">
-          <van-button native-type="submit" type="primary" size="large" round>
+          <van-button native-type="submit" type="primary" round block>
             保 存
           </van-button>
         </div>
@@ -223,5 +225,9 @@ export default {
 
 .button {
   padding: 32px 16px 0 16px;
+}
+
+:deep(.van-field__error-message) {
+  text-align: right;
 }
 </style>

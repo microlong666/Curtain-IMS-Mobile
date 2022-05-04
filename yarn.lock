@@ -8714,10 +8714,10 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vant@3.4.8:
-  version "3.4.8"
-  resolved "https://registry.npmmirror.com/vant/-/vant-3.4.8.tgz#f8f2ac9db91aae05d652e617a7a50264c8a69ab9"
-  integrity sha512-xPAiPdCiaZbcdbVplVh4N2lmYzDAr2UdadkUHoa9uwfHS9/dab4f8TigfCFzlfAEk53U1J6w+6qZ+whtt4T3hw==
+vant@3.4.9:
+  version "3.4.9"
+  resolved "https://registry.npmmirror.com/vant/-/vant-3.4.9.tgz#53ea09b0aa228474fe5a5a6c6bc9f07ba91c6ad9"
+  integrity sha512-OXwfL3oDahlEQC4HhaC7TmM9uoPDjAuWi1mR/OLW3JyOvPoCR8YhOtX2M6OQnz3Hnd3l4oWjjASKNGltWiPtjQ==
   dependencies:
     "@vant/icons" "^1.8.0"
     "@vant/popperjs" "^1.1.0"

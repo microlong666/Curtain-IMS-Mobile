@@ -33,6 +33,7 @@
                 :title="item.name"
                 :label="item.address"
                 :value="item.phone"
+                :to="'/supplier/detail/' + item.id"
                 is-link
               >
               </van-cell>
@@ -43,12 +44,14 @@
                 type="primary"
                 text="修改"
                 style="height: 100%"
+                :to="'/supplier/form/' + item.id"
               />
               <van-button
                 square
                 type="danger"
                 text="删除"
                 style="height: 100%"
+                @click="deleteSupplier(item.id)"
               />
             </template>
           </van-swipe-cell>
@@ -59,7 +62,8 @@
 </template>
 
 <script>
-import { getSupplierList } from '@/api/supplier'
+import { getSupplierList, deleteSupplier } from '@/api/supplier'
+import qs from 'qs'
 
 export default {
   name: 'Supplier',
@@ -77,7 +81,7 @@ export default {
     }
   },
   created() {
-    this.$emit('setter', { rightText: '添加', route: '/supplier/add' })
+    this.$emit('setter', { rightText: '添加', route: '/supplier/form' })
   },
   methods: {
     // List 加载
@@ -99,6 +103,29 @@ export default {
       this.finished = false
       this.loading = true
       this.onLoad()
+    },
+    deleteSupplier(id) {
+      this.$dialog
+        .confirm({
+          message: '确认删除此供应商？'
+        })
+        .then(() => {
+          deleteSupplier(qs.stringify({ id: id }))
+            .then((res) => {
+              if (res.data.success) {
+                this.$toast.success({
+                  message: '删除成功'
+                })
+                this.onRefresh()
+              }
+            })
+            .catch((error) => {
+              this.$toast.fail({
+                message: '删除失败，' + error.message
+              })
+            })
+        })
+        .catch(() => {})
     }
   }
 }

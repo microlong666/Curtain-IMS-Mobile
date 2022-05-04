@@ -37,7 +37,11 @@ import {
   CollapseItem,
   ActionSheet,
   Tab,
-  Tabs
+  Tabs,
+  Calendar,
+  DatetimePicker,
+  RadioGroup,
+  Radio
 } from 'vant'
 
 const componentList = [
@@ -79,7 +83,11 @@ const componentList = [
   CollapseItem,
   ActionSheet,
   Tab,
-  Tabs
+  Tabs,
+  Calendar,
+  DatetimePicker,
+  RadioGroup,
+  Radio
 ]
 
 export function registerVantComp(app) {

@@ -23,11 +23,44 @@ export function getCustomerDetail(data) {
 }
 
 /**
+ * 添加客户
+ */
+export function addCustomer(data) {
+  return request({
+    url: '/clCustomer/addItem',
+    method: 'post',
+    data
+  })
+}
+
+/**
  * 修改客户
  */
 export function editCustomer(data) {
   return request({
     url: '/clCustomer/editItem',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 删除客户
+ */
+export function deleteCustomer(data) {
+  return request({
+    url: '/clCustomer/delete',
+    method: 'post',
+    data
+  })
+}
+
+/**
+ * 生成账号
+ */
+export function createAccount(data) {
+  return request({
+    url: '/clCustomer/createCustomerUser',
     method: 'post',
     data
   })

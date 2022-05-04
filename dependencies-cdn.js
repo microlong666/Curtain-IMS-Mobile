@@ -4,5 +4,5 @@ module.exports = [
   { name: 'vuex', library: 'Vuex', js: 'https://cdn.jsdelivr.net/npm/vuex@4.0.1/dist/vuex.global.min.js', css: '' },
   { name: 'axios', library: 'axios', js: 'https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js', css: '' },
   { name: 'normalize.css', library: 'normalize.css', js: '', css: 'https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css' },
-  { name: 'vant', library: 'vant', js: 'https://cdn.jsdelivr.net/npm/vant@3.4.8/lib/vant.min.js', css: 'https://cdn.jsdelivr.net/npm/vant@3.4.8/lib/index.css' }
+  { name: 'vant', library: 'vant', js: 'https://cdn.jsdelivr.net/npm/vant@3.4.9/lib/vant.min.js', css: 'https://cdn.jsdelivr.net/npm/vant@3.4.9/lib/index.css' }
 ]

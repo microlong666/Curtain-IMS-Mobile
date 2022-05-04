@@ -20,7 +20,7 @@
         >
           <van-swipe-cell class="cell" v-for="item in needList" :key="item">
             <van-cell-group inset>
-              <van-cell center is-link>
+              <van-cell center :to="'/need/detail/' + item.id" is-link>
                 <template #title>
                   <span>{{ item.customerName }}</span>
                 </template>
@@ -34,32 +34,55 @@
                 </template>
               </van-cell>
             </van-cell-group>
-            <template #right v-if="userInfo.roleName === '客户'">
+            <template #right>
+              <van-button
+                v-if="userInfo.roleName === '客户' && item.status === '待确认'"
+                type="success"
+                text="修改"
+                style="height: 100%"
+                :to="'/need/form/' + item.id"
+                square
+              />
               <van-button
                 square
                 type="primary"
                 text="变更"
                 style="height: 100%"
+                @click="
+                  () => {
+                    show = true
+                    needId = item.id
+                  }
+                "
               />
             </template>
           </van-swipe-cell>
         </van-list>
       </div>
     </van-pull-refresh>
+    <van-action-sheet
+      v-model:show="show"
+      :actions="setActions()"
+      cancel-text="取消"
+      @select="onSelect"
+    />
   </div>
 </template>
 
 <script>
 import { getCustomerDetail } from '@/api/customer'
-import { getNeedList } from '@/api/need'
+import { getNeedList, editNeed } from '@/api/need'
 import store from '@/store'
 import dayjs from 'dayjs'
+import qs from 'qs'
 
 export default {
   name: 'Need',
   inject: ['reload'],
   data() {
     return {
+      show: false,
+      needId: null,
       loading: false,
       finished: false,
       refreshing: false,
@@ -80,7 +103,19 @@ export default {
       userInfo: store.state.user.user
     }
   },
+  created() {
+    if (this.userInfo.roleName === '客户') {
+      this.$emit('setter', { rightText: '添加', route: '/need/form' })
+    }
+  },
   methods: {
+    setActions() {
+      if (this.userInfo.roleName === '客户') {
+        return [{ name: '确认' }, { name: '关闭' }]
+      } else {
+        return [{ name: '确认' }, { name: '受理' }, { name: '关闭' }]
+      }
+    },
     // List 加载
     async onLoad() {
       if (this.refreshing) {
@@ -136,6 +171,35 @@ export default {
       this.finished = false
       this.loading = true
       this.onLoad()
+    },
+    onSelect(item) {
+      let status = null
+      switch (item.name) {
+        case '确认':
+          status = 1
+          break
+        case '受理':
+          status = 2
+          break
+        case '关闭':
+          status = 3
+      }
+      editNeed(qs.stringify({ id: this.needId, status: status }))
+        .then((res) => {
+          if (res.data.success) {
+            this.$toast.success({
+              message: '变更成功'
+            })
+            this.needId = null
+            this.show = false
+            this.onRefresh()
+          }
+        })
+        .catch((error) => {
+          this.$toast.fail({
+            message: '变更失败，' + error.message
+          })
+        })
     }
   }
 }

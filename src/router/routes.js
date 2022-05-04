@@ -62,7 +62,26 @@ const routes = [
         name: 'Need',
         component: () => import('@/views/need'),
         meta: {
-          title: '需求登记'
+          title: '需求管理',
+          noCache: true
+        }
+      },
+      {
+        path: '/need/form/:id?',
+        name: 'NeedForm',
+        component: () => import('@/views/need/form.vue'),
+        meta: {
+          title: '需求登记',
+          noCache: true
+        }
+      },
+      {
+        path: '/need/detail/:id',
+        name: 'NeedDetail',
+        component: () => import('@/views/need/detail.vue'),
+        meta: {
+          title: '需求详情',
+          noCache: true
         }
       },
       {
@@ -97,7 +116,28 @@ const routes = [
         component: () => import('@/views/customer'),
         meta: {
           title: '客户管理',
-          roles: ['超级管理员', '系统管理员']
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/customer/form/:id?',
+        name: 'CustomerForm',
+        component: () => import('@/views/customer/form.vue'),
+        meta: {
+          title: '客户管理',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/customer/detail/:id',
+        name: 'CustomerDetail',
+        component: () => import('@/views/customer/detail.vue'),
+        meta: {
+          title: '客户详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
         }
       },
       {
@@ -106,7 +146,28 @@ const routes = [
         component: () => import('@/views/supplier'),
         meta: {
           title: '供应商管理',
-          roles: ['超级管理员', '系统管理员']
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/supplier/form/:id?',
+        name: 'SupplierForm',
+        component: () => import('@/views/supplier/form.vue'),
+        meta: {
+          title: '供应商管理',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
+        }
+      },
+      {
+        path: '/supplier/detail/:id',
+        name: 'SupplierDetail',
+        component: () => import('@/views/supplier/detail.vue'),
+        meta: {
+          title: '供应商详情',
+          roles: ['超级管理员', '系统管理员'],
+          noCache: true
         }
       },
       {

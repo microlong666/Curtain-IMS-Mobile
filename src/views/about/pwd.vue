@@ -5,6 +5,7 @@
         <van-field
           label="旧密码"
           placeholder="旧密码"
+          input-align="right"
           type="password"
           v-model="form.oldPassword"
           :rules="rules.oldPassword"
@@ -12,6 +13,7 @@
         <van-field
           label="新密码"
           placeholder="新密码"
+          input-align="right"
           type="password"
           :maxlength="12"
           v-model="form.newPassword"
@@ -20,6 +22,7 @@
         <van-field
           label="确认密码"
           placeholder="确认密码"
+          input-align="right"
           type="password"
           :maxlength="12"
           v-model="form.confirmPassword"
@@ -27,7 +30,7 @@
         />
       </van-cell-group>
       <div class="button">
-        <van-button native-type="submit" type="primary" size="large" round>
+        <van-button native-type="submit" type="primary" round block>
           保 存
         </van-button>
       </div>
@@ -126,5 +129,9 @@ export default {
 
 .button {
   padding: 32px 16px 0 16px;
+}
+
+:deep(.van-field__error-message) {
+  text-align: right;
 }
 </style>
